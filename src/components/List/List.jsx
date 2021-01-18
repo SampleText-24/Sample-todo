@@ -1,19 +1,20 @@
 import React from 'react'
-import listSvg from "../assets/img/list.svg"
+
+import './list.scss'
 
 
 const List = ({ items }) => {
     return (
-        <ul className="todo__list">
+        <ul className="list">
             {items.map(item => (
-                <li className='active'>
-                    <i>
+                <li className={item.active ? 'active' : ''}>
                     {item.icon ? (
                         item.icon
                     ) : (
-                        <i className={`badge badge--${item.color}`}></i>
+                        <i className={`badge badge--${item.color}`}>
+
+                        </i>
                     )}
-                    </i>
                     <span>{item.name}</span>
                 </li>
             ))}
