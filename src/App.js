@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import List from "./components/List/List"
+import AddListButton from "./components/AddListButton/AddListButton";
+
+import DB from './assets/db.json'
 
 function App() {
   return (
-    <div className="todo">
-      <div className="todo__sidebar">
+    <div className={"todo"}>
+      <div className={"todo__sidebar"}>
         <List items={[
             {
                 icon: (
@@ -41,10 +44,12 @@ function App() {
                 name: 'Films and series',
                 active: false,
             },
-          ]}
+        ]}
+          isRemovable={true}
         />
+        <AddListButton colors={DB.colors} />
       </div>
-      <div className="todo__tasks">
+      <div className={"todo__tasks"}>
 
       </div>
     </div>

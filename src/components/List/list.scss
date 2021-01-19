@@ -1,5 +1,14 @@
 .list {
   margin-bottom: 30px;
+
+  &__add-button {
+    opacity: 0.4;
+    transition: opacity 0.2s;
+    &:hover {
+     opacity: 1;
+    }
+  }
+
   li {
     display: flex;
     align-items: center;
@@ -13,6 +22,11 @@
       border-radius: 4px;
     }
 
+    .badge {
+      position: relative;
+      left: 2px;
+    }
+
     svg {
       margin-right: 6px;
     }
@@ -20,26 +34,6 @@
     i {
       margin-right: 9px;
 
-    }
-
-    .badge {
-      width: 10px;
-      height: 10px;
-      border-radius: 30px;
-      position: relative;
-      left: 2px;
-
-      &--green {
-        background-color: #42B883;
-      }
-
-      &--blue {
-        background-color: #64C4ED;
-      }
-
-      &--pink {
-        background-color: #FFBBCC;
-      }
     }
   }
 }

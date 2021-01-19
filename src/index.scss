@@ -25,14 +25,55 @@ body {
   border: 1px solid #383838;
   font-size: 14px;
 
-    .todo__sidebar {
+    &__sidebar {
       background-color: #212121;
       width: 200px;
-      height: 100%;
+      height: calc(100% - 120px);
       border-right: 1px solid #383838;
       padding: 60px 20px;
       color: #ffffff  ;
     }
 
+    &__tasks {
+      background-color: #121212;
+    }
+}
 
+.button {
+  background-color: #121212;
+  border-radius: 4px;
+  color: #909090;
+  border: 0;
+  padding: 10px 20px;
+  cursor: pointer;
+
+  transition: 0.1s linear;
+
+  &:hover {
+    box-shadow: 0 0 20px #797979;
+  }
+
+  &:active {
+    background: lighten(#121212, 20%);
+    box-shadow: 0 0 20px lighten(#797979, 30%);
+    color: lighten(#909090, 30%);
+  }
+}
+
+.field {
+  padding: 8px 12px;
+  width: 100%;
+
+  background: #121212;
+  border: 1px solid #383838;
+  box-sizing: border-box;
+  border-radius: 4px;
+  color: #ffffff;
+
+  transition: 0.2s;
+
+  &:focus {
+    border-color: lighten(#383838, 12%);
+    box-shadow: 0 0 20px #797979;
+  }
 }
