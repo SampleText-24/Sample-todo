@@ -7,10 +7,27 @@ import closeSvg from '../../assets/img/close.svg'
 import './AddListButton.scss'
 
 
-const AddListButton = ({ colors }) => {
+const AddListButton = ({ colors, onAddList }) => {
 
-    const [visiblePopup, setVisiblePopup] = useState(true)
+    const [visiblePopup, setVisiblePopup] = useState(false)
     const [selectedColor, setSelectedColor] = useState(colors[0].id)
+    const [inputValue, setInputValue] = useState('')
+
+    const onClose = () => {
+        setVisiblePopup(false)
+        setInputValue('')
+        setSelectedColor(colors[0].id)
+    }
+
+    const addList = () => {
+        if (!inputValue) {
+            alert('Enter list name')
+            return
+        }
+        const color = colors.filter(c => c.id === selectedColor)[0].name
+        onAddList({ id: Math.random(), name: inputValue, color: color })
+        onClose();
+    }
 
     return (
     <div className={'add-list'}>
@@ -34,11 +51,19 @@ const AddListButton = ({ colors }) => {
         />
         { visiblePopup && <div className='add-list__popup'>
             <img
-                onClick={() => setVisiblePopup()}
-                src={closeSvg} alt="Close button"
+                onClick={ onClose }
+                src={ closeSvg } alt="Close button"
                 className="add-list__popup-close-btn"
             />
-            <input className={'field'} type="text" placeholder={'List name'}/>
+
+            <input
+                value={inputValue}
+                onChange={ e => setInputValue(e.target.value) }
+                className={'field'}
+                type="text"
+                placeholder={'List name'}
+            />
+
             <div className="add-list__popup-colors">
                 {
                     colors.map(color => <Badge
@@ -49,7 +74,7 @@ const AddListButton = ({ colors }) => {
                     />)
                 }
             </div>
-            <button className={'button'}>Add</button>
+            <button onClick={addList} className={'button'}>Add</button>
         </div>}
     </div>
     )

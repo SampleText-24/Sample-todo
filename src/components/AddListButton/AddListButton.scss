@@ -8,8 +8,8 @@
 
     width: 235px;
     height: 150px;
-    background: #383838;
-    box-shadow: 1px 1px 20px #797979;
+    background: #282828;
+    box-shadow: 0 0 10px 2px rgba(130, 130, 130, 0.8);
     border-radius: 10px;
 
 
@@ -38,6 +38,10 @@
         border: 2px solid transparent;
 
         transition: 0.2s;
+
+        &:hover {
+          box-shadow: 0 0 10px 2px rgba(130, 130, 130, 0.8);
+        }
 
         &.active {
           border: 2px solid #ffffff;
