@@ -8,7 +8,7 @@ import './list.scss'
 import axios from "axios";
 
 
-const List = ({ items, isRemovable, onClick, onRemove }) => {
+const List = ({ items, isRemovable, onClick, onRemove, onClickItem, activeList }) => {
 
     const removeList = (item) => {
         if (window.confirm('Are you sure you want to delete the list?')) {
@@ -21,7 +21,15 @@ const List = ({ items, isRemovable, onClick, onRemove }) => {
     return (
         <ul onClick={onClick} className={"list"}>
             {items.map((item, index) => (
-                <li key={index} className={classNames(item.className, {'active': item.active})}>
+                <li
+                    key={index}
+                    className={classNames(item.className, {
+                        'active': item.active
+                            ? item.active
+                            : activeList && activeList.id === item.id
+                    })}
+                    onClick={ onClickItem ? () => onClickItem(item) : null }
+                >
                     { item.icon ?  item.icon : <Badge color={item.color.name} /> }
                     <span>{item.name}</span>
                     {

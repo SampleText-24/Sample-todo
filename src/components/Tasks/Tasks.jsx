@@ -1,20 +1,35 @@
 import React from 'react';
 import penSvg from '../../assets/img/pen.svg'
-
+import axios from "axios";
+import AddTaskForm from "./AddTaskForm/AddTaskForm";
 
 import './Tasks.scss'
 
-const Tasks = ({ list }) => {
-    console.log(list)
+const Tasks = ({ list, onEditTitle, onAddTask }) => {
+
+    const editTitle = () => {
+        const newTitle = window.prompt('Enter new title', list.name)
+        if (newTitle) {
+            onEditTitle(list.id, newTitle)
+
+            axios.patch('http://localhost:3001/lists/' + list.id, {
+                name: newTitle
+            }).catch(() => {
+                alert('Failed to update list title')
+            })
+
+        }
+    }
 
     return (
         <div className={'tasks'}>
             <h2 className={'tasks__title'}>
                 {list.name}
-                <img src={penSvg} alt="Edit button"/>
+                <img onClick={editTitle} src={penSvg} alt="Edit button"/>
             </h2>
 
             <div className={"tasks__items"}>
+                {!list.tasks.length && <h2>No tasks</h2>}
                 {
                     list.tasks.map(task => (
                         <div key={task.id} className={"tasks__items-row"}>
@@ -36,6 +51,7 @@ const Tasks = ({ list }) => {
                         </div>
                     ))
                 }
+                <AddTaskForm list={list} onAddTask={onAddTask} />
             </div>
         </div>
     );
