@@ -12,12 +12,14 @@ import './AddListButton.scss'
 const AddListButton = ({ colors, onAddList }) => {
 
     const [visiblePopup, setVisiblePopup] = useState(false)
-    const [selectedColor, setSelectedColor] = useState(3)
+    const [selectedColor, setSelectedColor] = useState(0)
     const [isLoading, setIsLoading] = useState(false)
     const [inputValue, setInputValue] = useState('')
 
     useEffect(() => {
-        setSelectedColor()
+        if (Array.isArray(colors)) {
+            setSelectedColor(colors[0].id);
+        }
     }, [colors])
 
     const onClose = () => {
@@ -38,8 +40,8 @@ const AddListButton = ({ colors, onAddList }) => {
                 colorId: selectedColor
             })
             .then(({ data }) => {
-                const color = colors.filter(c => c.id ===selectedColor)[0].name
-                const listObj = { ...data, color: { name: color } }
+                const color = colors.filter(c => c.id ===selectedColor)[0]
+                const listObj = { ...data, color, tasks: [] }
                 onAddList(listObj)
                 onClose()
             })

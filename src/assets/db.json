@@ -31,7 +31,7 @@
       "id": 1,
       "listId": 2,
       "text": "Изучить JavaScript",
-      "completed": true
+      "completed": false
     },
     {
       "id": 2,
@@ -43,19 +43,13 @@
       "id": 3,
       "listId": 2,
       "text": "ReactJS Hooks (useState, useReducer, useEffect и т.д.)",
-      "completed": true
+      "completed": false
     },
     {
       "id": 4,
       "listId": 2,
       "text": "Redux (redux-observable, redux-saga)",
       "completed": false
-    },
-    {
-      "listId": 2,
-      "text": "123",
-      "completed": true,
-      "id": 5
     },
     {
       "listId": 1,
@@ -66,7 +60,7 @@
     {
       "listId": 1,
       "text": "qweqwe",
-      "completed": false,
+      "completed": true,
       "id": 7
     },
     {
@@ -86,54 +80,6 @@
       "text": "Купить 1984!",
       "completed": true,
       "id": 10
-    },
-    {
-      "listId": 2,
-      "text": "222",
-      "completed": true,
-      "id": 12
-    },
-    {
-      "listId": 4,
-      "text": "dsa",
-      "completed": false,
-      "id": 13
-    },
-    {
-      "listId": 4,
-      "text": "",
-      "completed": false,
-      "id": 14
-    },
-    {
-      "listId": 4,
-      "text": "",
-      "completed": false,
-      "id": 15
-    },
-    {
-      "listId": 4,
-      "text": "asd",
-      "completed": false,
-      "id": 16
-    },
-    {
-      "listId": 4,
-      "text": "dsa",
-      "completed": false,
-      "id": 17
-    },
-    {
-      "listId": 4,
-      "text": "dsa",
-      "completed": false,
-      "id": 18
-    },
-    {
-      "listId": 4,
-      "text": "dsa",
-      "completed": false,
-      "id": 19
     }
   ],
   "colors": [
