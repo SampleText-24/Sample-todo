@@ -2,6 +2,7 @@ import React from 'react';
 import penSvg from '../../assets/img/pen.svg'
 import axios from "axios";
 import AddTaskForm from "./AddTaskForm/AddTaskForm";
+import {Link} from "react-router-dom";
 
 import './Tasks.scss'
 import TasksItem from "./TasksItem/TasksItem";
@@ -23,13 +24,15 @@ const Tasks = ({ list, onEditTitle, onAddTask, onRemoveTask, onCompleteTask, wit
     }
 
     return (
-        <div className={'tasks'}>
-            <h2 style={{ color: list.color.hex }} className={'tasks__title'}>
-                {list.name}
-                <img onClick={editTitle} src={penSvg} alt="Edit button"/>
-            </h2>
+        <div className="tasks">
+            <Link to={`/lists/${list.id}`}>
+                <h2 style={{ color: list.color.hex }} className="tasks__title">
+                    {list.name}
+                    <img onClick={editTitle} src={penSvg} alt="Edit button"/>
+                </h2>
+            </Link>
 
-            <div className={"tasks__items"}>
+            <div className="tasks__items">
                 {!withoutEmpty && list.tasks && !list.tasks.length && <h2>No tasks</h2>}
                 { list.tasks &&
                     list.tasks.map(task => (

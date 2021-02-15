@@ -4,14 +4,16 @@ const TasksItem = ({ id, text, completed, onRemove, onComplete, list }) => {
 
     const onChangeCheckbox = e => {
         onComplete(list.id, id, e.target.checked)
+        console.log(e.target.checked)
     }
 
     return (
-        <div key={id} className={"tasks__items-row"}>
-            <div className={"checkbox"}>
+        <div key={id} className="tasks__items-row">
+            <div className="checkbox">
                 <input
                     onChange={onChangeCheckbox}
-                    id={`task-${id}`} type="checkbox"
+                    id={`task-${id}`}
+                    type="checkbox"
                     checked={completed}
                 />
                 <label htmlFor={`task-${id}`}>

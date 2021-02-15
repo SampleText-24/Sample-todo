@@ -44,15 +44,15 @@ const AddTaskForm = ({ list, onAddTask }) => {
                 :
                 (<div className="tasks__form-block">
                 <input
-                    className={'field'}
+                    className="field"
                     type="text"
-                    placeholder={'Task text'}
+                    placeholder="Task text"
                     onChange={e => setInputValue(e.target.value)}
                 />
-                <button disabled={isLoading} onClick={addTask} className={'button'}>
+                <button disabled={isLoading} onClick={addTask} className="button">
                     { isLoading ? 'Adding...' : 'Add task'}
                 </button>
-                <button onClick={toggleFormVisible} className={'button button--grey'}>
+                <button onClick={toggleFormVisible} className="button button--grey">
                     Cancel
                 </button>
             </div>)

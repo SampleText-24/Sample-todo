@@ -166,6 +166,18 @@
       display: none;
     }
 
+    input:checked + label {
+      background-color: #4DD599;
+      border-color: #4DD599;
+
+      svg {
+        opacity: 1;
+        path {
+          stroke: #FFFFFF;
+        }
+      }
+    }
+
     &:hover {
       label {
         svg {
@@ -198,16 +210,6 @@
       }
     }
 
-    input:checked + label {
-      background-color: #4DD599;
-      border-color: #4DD599;
 
-      svg {
-        opacity: 1;
-        path {
-          stroke: #FFFFFF;
-        }
-      }
-    }
   }
 }

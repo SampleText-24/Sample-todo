@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import List from "./components/List/List"
 import AddListButton from "./components/AddListButton/AddListButton";
 import Tasks from "./components/Tasks/Tasks";
 import axios from "axios";
-import { Route, useHistory, useLocation } from 'react-router-dom'
+import {Route, useHistory} from 'react-router-dom'
 
 
 function App() {
@@ -12,7 +12,15 @@ function App() {
   const [colors, setColors] = useState(null)
   const [activeList, setActiveList] = useState(null)
   let history = useHistory()
-  let location = useLocation();
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/lists?_expand=color&_embed=tasks').then(({ data }) => {
+            setLists(data)
+        })
+        axios.get('http://localhost:3001/colors').then(({ data }) => {
+            setColors(data)
+        })
+    }, [])
 
     const onAddList = (obj) => {
       const newList = [ ...lists, obj ]
@@ -52,7 +60,7 @@ function App() {
             if (list.id === listId) {
                 list.tasks = list.tasks.map(task => {
                     if (task.id === taskId) {
-                        task.comleted = completed
+                        task.completed = completed
                     }
                     return task
                 })
@@ -64,7 +72,15 @@ function App() {
             .patch('http://localhost:3001/tasks/' + taskId, {
                 completed
             })
+            .catch(() => {
+                alert('Не удалось обновить задачу');
+        })
     }
+
+    useEffect((taskId) => {
+        axios.get('http://localhost:3001/tasks/').then(({data}) => {
+            console.log(data)} )
+    })
 
     const onEditListTitle = (id, title) => {
       const newList = lists.map(item => {
@@ -77,15 +93,6 @@ function App() {
     }
 
     useEffect(() => {
-      axios.get('http://localhost:3001/lists?_expand=color&_embed=tasks').then(({ data }) => {
-        setLists(data)
-      })
-      axios.get('http://localhost:3001/colors').then(({ data }) => {
-        setColors(data)
-      })
-    }, [])
-
-    useEffect(() => {
       const listId = history.location.pathname.split('lists/')[1]
       if (lists) {
           const list = lists.find(list => list.id === Number(listId))
@@ -94,14 +101,15 @@ function App() {
     }, [lists, history.location.pathname])
 
   return (
-    <div className={"todo"}>
-      <div className={"todo__sidebar"}>
+    <div className="todo">
+      <div className="todo__sidebar">
         <List
             onClickItem={list => {
                 history.push(`/`)
             }}
             items={[
             {
+                active: history.location.pathname === '/',
                 icon: (
                     <svg
                         width="14"
@@ -116,7 +124,6 @@ function App() {
                      </svg>
                 ),
                 name: 'All tasks',
-                active: history.location.pathname === '/',
             },
           ]}
         />
@@ -127,19 +134,19 @@ function App() {
                     const newLists = lists.filter(item => item.id !== id)
                     setLists(newLists)
                 }}
-                isRemovable={true}
                 onClickItem={list => {
                     history.push(`/lists/${list.id}`)
                 }}
                 activeList={activeList}
+                isRemovable
             />
         ) : (
             'Loading...'
         )}
         <AddListButton onAddList={onAddList} colors={colors} />
       </div>
-      <div className={"todo__tasks"}>
-          <Route exact path={'/'}>
+      <div className="todo__tasks">
+          <Route exact path="/">
               {lists &&
                   lists.map(list =>
                       <Tasks
@@ -155,7 +162,7 @@ function App() {
               }
           </Route>
 
-          <Route path={'/lists/:id'}>
+          <Route path="/lists/:id">
               {lists && activeList &&
               <Tasks
                   list={activeList}
